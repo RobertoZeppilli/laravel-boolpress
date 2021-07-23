@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use App\Post;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -27,7 +30,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -36,9 +39,36 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request, Post $post)
+    {   
+        $slug = $request->get('title');
+
+        $request->request->add([
+            "slug" => Str::slug($slug ,'-')
+        ]);
+
+        $request->validate(
+            [
+                "title" => "required|max:255",
+                "slug" => "unique:posts",
+                "body" => "required|max:65535"
+            ],
+            [
+                "required" => ":attribute is required!",
+                "slug.unique" => "The slug must be unique!",
+                "max" => ":attribute cannot be much longer!"
+            ]
+        );
+
+        $post = new Post();
+
+        $post->fill($request->all());
+
+        $post->save();
+
+        return redirect()
+        ->route('admin.posts.show', $post->id)
+        ->with('message', 'New post created!');
     }
 
     /**
@@ -58,9 +88,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -70,9 +100,34 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $slug = $request->get('title');
+
+        $request->request->add([
+            'slug' => Str::slug($slug, '-')
+        ]);
+
+        $request->validate(
+            [
+                "title" => "required|max:255",
+                "slug" => [
+                    Rule::unique('posts')->ignore($post->id)
+                ],
+                "body" => "required|max:65535"
+            ],
+            [
+                "required" => ":attribute is required!",
+                "slug.unique" => "The slug must be unique!",
+                "max" => ":attribute cannot be much longer!"
+            ]
+        );
+
+        $post->update($request->all());
+
+        return redirect()
+        ->route('admin.posts.show', $post->id)
+        ->with('message', 'Post updated!');
     }
 
     /**
@@ -81,8 +136,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()
+            ->route('admin.posts.index')
+            ->with('message', 'Post deleted!');
     }
 }
