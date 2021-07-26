@@ -11,7 +11,9 @@
 
         <div class="posts-header d-flex justify-content-between align-items-center my-3">
             <h2>Posts Index</h2>
-            <a class="btn btn-primary" href="{{ route('admin.posts.create') }}">New Post</a>
+            <a class="btn btn-primary" href="{{ route('admin.posts.create') }}">
+                <i class="fas fa-plus"></i>
+            </a>
         </div>
         <table class="table table-striped table-dark">
             <thead>
@@ -29,13 +31,13 @@
                         <td>{{ $post->title }}</td>
                         <td>{{ $post->slug }}</td>
                         <td>
-                            <a class="btn btn-success text-dark" href="{{ route('admin.posts.show', $post->id) }}">
-                                Show
+                            <a class="btn btn-primary text-dark" href="{{ route('admin.posts.show', $post->id) }}">
+                                <i class="fas fa-search text-light"></i>
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn-warning" href="{{ route('admin.posts.edit', $post->id) }}">
-                                Edit
+                            <a class="btn btn-success" href="{{ route('admin.posts.edit', $post->id) }}">
+                                <i class="fas fa-pencil-alt text-light"></i>
                             </a>
                         </td>
                         <td>
@@ -44,7 +46,9 @@
                                 @csrf
                                 @method('DELETE')
                                 
-                                <button class="btn btn-danger text-dark" type="submit">Delete</button>
+                                <button class="btn btn-danger text-dark" type="submit">
+                                    <i class="fas fa-trash-alt text-light"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

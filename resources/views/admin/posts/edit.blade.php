@@ -30,8 +30,12 @@
             
         </div>
         <div class="d-flex justify-content-between align-items-center">
-            <button type="submit" class="btn btn-primary my-5">Save</button>
-            <a class="btn btn-secondary text-light" href="{{ route('admin.posts.show', $post->id) }}">Back</a>
+            <a class="btn btn-secondary text-light" href="{{ route('admin.posts.index', $post->id) }}">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <button type="submit" class="btn btn-primary my-5">
+                <i class="fas fa-check"></i>
+            </button>
         </div>
     </form>
 </div>

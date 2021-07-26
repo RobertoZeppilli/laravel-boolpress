@@ -10,7 +10,32 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class PostController extends Controller
-{
+{   
+    private $validation = [
+        "title" => "required|max:255",
+        "body" => "required|max:65535"
+    ];
+    private $validationMsg = [
+        "required" => ":attribute is required!",
+        "max" => ":attribute cannot be much longer!"
+    ];
+
+    private function createSlug($data) {
+        $slug = Str::slug($data["title"], "-");
+        $postExists = Post::where('slug', $slug)->first();
+
+        $starterSlug = $slug;
+        $counter = 1;
+
+        while($postExists) {
+            $slug = $starterSlug . '-' . $counter;
+            
+            $postExists = Post::where('slug', $slug)->first();
+            $counter++;
+        }
+
+        return $slug;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,28 +66,17 @@ class PostController extends Controller
      */
     public function store(Request $request, Post $post)
     {   
-        $slug = $request->get('title');
 
-        $request->request->add([
-            "slug" => Str::slug($slug ,'-')
-        ]);
-
-        $request->validate(
-            [
-                "title" => "required|max:255",
-                "slug" => "unique:posts",
-                "body" => "required|max:65535"
-            ],
-            [
-                "required" => ":attribute is required!",
-                "slug.unique" => "The slug must be unique!",
-                "max" => ":attribute cannot be much longer!"
-            ]
-        );
-
+        $data = $request->all();
+        
+        $request->validate($this->validation, $this->validationMsg);
+        
         $post = new Post();
 
-        $post->fill($request->all());
+        $slug = $this->createSlug($data);
+        $data['slug'] = $slug;
+
+        $post->fill($data);
 
         $post->save();
 
@@ -101,29 +115,17 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
-    {
-        $slug = $request->get('title');
+    {   
+        $data = $request->all();
+        
+        $request->validate($this->validation, $this->validationMsg);
 
-        $request->request->add([
-            'slug' => Str::slug($slug, '-')
-        ]);
+        if($post->title != $data['title']) {
+            $slug = $this->createSlug($data);
+            $data['slug'] = $slug;
+        }
 
-        $request->validate(
-            [
-                "title" => "required|max:255",
-                "slug" => [
-                    Rule::unique('posts')->ignore($post->id)
-                ],
-                "body" => "required|max:65535"
-            ],
-            [
-                "required" => ":attribute is required!",
-                "slug.unique" => "The slug must be unique!",
-                "max" => ":attribute cannot be much longer!"
-            ]
-        );
-
-        $post->update($request->all());
+        $post->update($data);
 
         return redirect()
         ->route('admin.posts.show', $post->id)

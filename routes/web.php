@@ -13,12 +13,8 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
+// Autenticazione con annullamento registrazione
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -33,4 +29,4 @@ Route::middleware('auth')
     });
 
 // rotte pubbliche
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('{any?}', 'HomeController@index')->where('any', '.*')->name('home');

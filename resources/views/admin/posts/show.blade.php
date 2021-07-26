@@ -16,8 +16,12 @@
             </div>
         </div>
         <div class="d-flex justify-content-between align-items-center">
-            <a class="btn btn-secondary" href="{{ route('admin.posts.index') }}">Back</a>
-            <a class="btn btn-warning" href="{{ route('admin.posts.edit', $post->id) }}">Edit</a>
+            <a class="btn btn-secondary" href="{{ route('admin.posts.index') }}">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <a class="btn btn-success" href="{{ route('admin.posts.edit', $post->id) }}">
+                <i class="fas fa-pencil-alt text-light"></i>
+            </a>
         </div>
     </div>
 @endsection
