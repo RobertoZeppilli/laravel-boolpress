@@ -6,30 +6,33 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Post;
+use App\Category;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class PostController extends Controller
-{   
+{
     private $validation = [
         "title" => "required|max:255",
-        "body" => "required|max:65535"
+        "body" => "required|max:65535",
+        "category_id" => "nullable|exists:categories,id"
     ];
     private $validationMsg = [
         "required" => ":attribute is required!",
         "max" => ":attribute cannot be much longer!"
     ];
 
-    private function createSlug($data) {
+    private function createSlug($data)
+    {
         $slug = Str::slug($data["title"], "-");
         $postExists = Post::where('slug', $slug)->first();
 
         $starterSlug = $slug;
         $counter = 1;
 
-        while($postExists) {
+        while ($postExists) {
             $slug = $starterSlug . '-' . $counter;
-            
+
             $postExists = Post::where('slug', $slug)->first();
             $counter++;
         }
@@ -53,9 +56,12 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Category $category)
     {
-        return view('admin.posts.create');
+
+        $categories = Category::all();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -65,12 +71,12 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Post $post)
-    {   
+    {
 
         $data = $request->all();
-        
+
         $request->validate($this->validation, $this->validationMsg);
-        
+
         $post = new Post();
 
         $slug = $this->createSlug($data);
@@ -81,8 +87,8 @@ class PostController extends Controller
         $post->save();
 
         return redirect()
-        ->route('admin.posts.show', $post->id)
-        ->with('message', 'New post created!');
+            ->route('admin.posts.show', $post->id)
+            ->with('message', 'New post created!');
     }
 
     /**
@@ -104,7 +110,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -115,12 +123,12 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
-    {   
+    {
         $data = $request->all();
-        
+
         $request->validate($this->validation, $this->validationMsg);
 
-        if($post->title != $data['title']) {
+        if ($post->title != $data['title']) {
             $slug = $this->createSlug($data);
             $data['slug'] = $slug;
         }
@@ -128,8 +136,8 @@ class PostController extends Controller
         $post->update($data);
 
         return redirect()
-        ->route('admin.posts.show', $post->id)
-        ->with('message', 'Post updated!');
+            ->route('admin.posts.show', $post->id)
+            ->with('message', 'Post updated!');
     }
 
     /**

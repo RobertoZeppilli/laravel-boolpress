@@ -20,7 +20,7 @@
             @enderror
 
         </div>
-        <div>
+        <div class="mb-3">
             <label for="body">Body</label>
             <textarea class="form-control @error('body') is-invalid @enderror" id="body" name="body" placeholder="Add the body of your post..." rows="4">{{ old('body', $post->body) }}</textarea>
 
@@ -28,6 +28,22 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror
             
+        </div>
+        <div>
+            <label for="category_id">Category</label>
+            <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="category_id">
+                <option value="">-- Select Category --</option>
+                @foreach ($categories as $category)
+                    <option 
+                        value="{{ $category->id }}" 
+                        {{ ($category->id == old('category_id', $post->category_id)) ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('category_id')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
         </div>
         <div class="d-flex justify-content-between align-items-center">
             <a class="btn btn-secondary text-light" href="{{ route('admin.posts.index', $post->id) }}">

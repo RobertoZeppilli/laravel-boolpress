@@ -20,6 +20,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Slug</th>
                     <th colspan="3">Actions</th>
                 </tr>
@@ -29,6 +30,11 @@
                     <tr>
                         <td>{{ $post->id }}</td>
                         <td>{{ $post->title }}</td>
+                        <td>
+                            @if ($post->category)
+                                {{ $post->category->name }}
+                            @endif
+                        </td>
                         <td>{{ $post->slug }}</td>
                         <td>
                             <a class="btn btn-primary text-dark" href="{{ route('admin.posts.show', $post->id) }}">
