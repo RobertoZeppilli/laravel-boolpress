@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Post;
 use App\Category;
+use App\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -15,7 +16,8 @@ class PostController extends Controller
     private $validation = [
         "title" => "required|max:255",
         "body" => "required|max:65535",
-        "category_id" => "nullable|exists:categories,id"
+        "category_id" => "nullable|exists:categories,id",
+        "tags" => "exists:tags,id"
     ];
     private $validationMsg = [
         "required" => ":attribute is required!",
@@ -60,8 +62,9 @@ class PostController extends Controller
     {
 
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -85,6 +88,10 @@ class PostController extends Controller
         $post->fill($data);
 
         $post->save();
+
+        if(array_key_exists('tags', $data)) {
+            $post->tags()->attach($data['tags']);
+        }
 
         return redirect()
             ->route('admin.posts.show', $post->id)
@@ -112,7 +119,10 @@ class PostController extends Controller
     {
 
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+
+        $tags = Tag::all();
+
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -134,6 +144,12 @@ class PostController extends Controller
         }
 
         $post->update($data);
+
+        if(array_key_exists('tags', $data)) {
+            $post->tags()->sync($data['tags']);
+        } else {
+            $post->tags()->detach();
+        }
 
         return redirect()
             ->route('admin.posts.show', $post->id)

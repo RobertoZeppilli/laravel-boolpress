@@ -21,6 +21,16 @@
                         <span class="badge badge-secondary">N/B</span>
                     @endif
                 </h3>
+                @if (count($post->tags) > 0) 
+                    @foreach ($post->tags as $tag)
+                        <a class="badge badge-pill badge-warning text-white" 
+                        href="{{ route('admin.tags.show', $tag->id) }}">
+                            {{ $tag->name }}
+                        </a>
+                    @endforeach
+                @else 
+                    <span class="badge badge-pill badge-secondary text-light">No tags</span>    
+                @endif
                 <p>{{ $post->body }}</p>
             </div>
         </div>
