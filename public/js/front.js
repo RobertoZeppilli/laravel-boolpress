@@ -2046,8 +2046,8 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
-    activePosts: function activePosts(num) {
-      this.num = num;
+    activePosts: function activePosts(n) {
+      this.num = n;
       this.getPosts(this.num);
     }
   },

@@ -88,8 +88,8 @@ export default {
         console.log(err);
       })
     },
-    activePosts(num) {
-      this.num = num
+    activePosts(n) {
+      this.num = n
       this.getPosts(this.num);
     }
   },
