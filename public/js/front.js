@@ -1976,6 +1976,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1991,8 +1997,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       posts: [],
+      categories: [],
+      // tags: [],
       current_page: 1,
-      last_page: 1
+      last_page: 1,
+      num: 0
     };
   },
   methods: {
@@ -2014,15 +2023,37 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.posts.forEach(function (post) {
           post.extract = _this.truncateText(post.body, 150);
-        }); // console.log(this.current_page);
-
+        });
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    getCategories: function getCategories() {
+      var _this2 = this;
+
+      axios.get('http://127.0.0.1:8000/api/categories').then(function (res) {
+        _this2.categories = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    getTags: function getTags() {
+      var _this3 = this;
+
+      axios.get('http://127.0.0.1:8000/api/tags').then(function (res) {
+        _this3.tags = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    activePosts: function activePosts(num) {
+      this.num = num;
+      this.getPosts(this.num);
     }
   },
   created: function created() {
     this.getPosts();
+    this.getCategories(); // this.getTags()
   }
 });
 
@@ -2049,10 +2080,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
   props: {
-    post: Object
+    post: Object,
+    categories: Array // tags: Array
+
   }
 });
 
@@ -2160,8 +2197,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Paginate',
   props: {
     'current': Number,
-    'last': Number,
-    'getPaginate': Function
+    'last': Number
   }
 });
 
@@ -2663,16 +2699,24 @@ var render = function() {
             "div",
             { staticClass: "row" },
             _vm._l(_vm.posts, function(post) {
-              return _c("Card", { key: post.id, attrs: { post: post } })
+              return _c("Card", {
+                key: post.id,
+                attrs: { post: post, categories: _vm.categories }
+              })
             }),
             1
           ),
           _vm._v(" "),
           _c("Paginate", {
-            attrs: {
-              current: _vm.current_page,
-              last: _vm.last_page,
-              getPaginate: _vm.getPosts
+            attrs: { current: _vm.current_page, last: _vm.last_page },
+            on: {
+              active: _vm.activePosts,
+              prev: function($event) {
+                return _vm.getPosts(_vm.current_page - 1)
+              },
+              next: function($event) {
+                return _vm.getPosts(_vm.current_page + 1)
+              }
             }
           })
         ],
@@ -2715,9 +2759,37 @@ var render = function() {
         _vm._v(" "),
         _c("p", [_vm._v(_vm._s(_vm.post.extract))]),
         _vm._v(" "),
-        _c("a", { staticClass: "card-link", attrs: { href: "#" } }, [
-          _vm._v("Leggi")
-        ])
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.post.category_id,
+                expression: "(post.category_id)"
+              }
+            ]
+          },
+          [
+            _c("span", [_vm._v("Category: ")]),
+            _vm._v(" "),
+            _vm._l(_vm.categories, function(category, index) {
+              return _c(
+                "span",
+                { key: index, staticClass: "badge badge-dark" },
+                [
+                  _vm._v(
+                    _vm._s(
+                      _vm.post.category_id == category.id ? category.name : ""
+                    )
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        )
       ])
     ])
   ])
@@ -2751,9 +2823,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", [
+    return _c("footer", { staticClass: "bg-dark text-light py-3" }, [
       _c("div", { staticClass: "container text-center" }, [
-        _c("h2", [_vm._v("footer")])
+        _c("h2", [_vm._v("© Laravel and Vue.JS")])
       ])
     ])
   }
@@ -2884,7 +2956,7 @@ var render = function() {
           staticClass: "btn btn-info",
           on: {
             click: function($event) {
-              return _vm.getPaginate(_vm.current - 1)
+              return _vm.$emit("prev")
             }
           }
         },
@@ -2900,7 +2972,7 @@ var render = function() {
             class: _vm.current == num ? "btn-info" : "btn-dark",
             on: {
               click: function($event) {
-                return _vm.getPaginate(num)
+                return _vm.$emit("active", num)
               }
             }
           },
@@ -2922,7 +2994,7 @@ var render = function() {
           staticClass: "btn btn-info",
           on: {
             click: function($event) {
-              return _vm.getPaginate(_vm.current + 1)
+              return _vm.$emit("next")
             }
           }
         },
