@@ -15,6 +15,8 @@
         @active="activePosts"
         @prev="getPosts(current_page - 1)"
         @next="getPosts(current_page + 1)"
+        @firstPage="getPosts(1)"
+        @lastPage="getPosts(last_page)"
       />
     </main>
     <Footer />
@@ -64,6 +66,7 @@ export default {
 
           this.posts.forEach((post) => {
             post.extract = this.truncateText(post.body, 150);
+            post.img = 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80';
           });
         })
         .catch((err) => {
@@ -103,6 +106,3 @@ export default {
 
 <style lang="scss">
 </style>
-
-
-// :getPaginate="getPosts"

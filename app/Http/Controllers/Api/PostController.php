@@ -9,7 +9,7 @@ use App\Post;
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::paginate(5);
+        $posts = Post::orderBy('id', 'DESC')->paginate(5);
         return response()->json($posts);
     }
 }
