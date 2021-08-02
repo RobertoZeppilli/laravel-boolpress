@@ -2,22 +2,7 @@
   <div>
     <Header />
     <main class="container">
-      <div class="row">
-        <Card v-for="post in posts" 
-        :key="post.id" 
-        :post="post" 
-        :categories="categories"
-        />
-      </div>
-      <Paginate
-        :current="current_page"
-        :last="last_page"
-        @active="activePosts"
-        @prev="getPosts(current_page - 1)"
-        @next="getPosts(current_page + 1)"
-        @firstPage="getPosts(1)"
-        @lastPage="getPosts(last_page)"
-      />
+      <router-view></router-view>
     </main>
     <Footer />
   </div>
@@ -25,23 +10,18 @@
 
 <script>
 import Header from "./components/Header";
-import Card from "./components/Card";
-import Paginate from "./components/Paginate";
 import Footer from "./components/Footer";
 
 export default {
   name: "App",
   components: {
     Header,
-    Card,
-    Paginate,
     Footer,
   },
   data() {
     return {
       posts: [],
       categories: [],
-      // tags: [],
       current_page: 1,
       last_page: 1,
       num: 0
@@ -82,15 +62,6 @@ export default {
         console.log(err);
       })
     },
-    getTags() {
-      axios.get('http://127.0.0.1:8000/api/tags')
-      .then(res => {
-        this.tags = res.data;
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    },
     activePosts(n) {
       this.num = n
       this.getPosts(this.num);
@@ -99,7 +70,6 @@ export default {
   created() {
     this.getPosts();
     this.getCategories();
-    // this.getTags()
   },
 };
 </script>

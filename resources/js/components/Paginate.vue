@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center my-5">
+  <div class="text-center">
     <button 
     class="btn btn-info text-light"
     @click="$emit('firstPage')"

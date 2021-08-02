@@ -12,7 +12,6 @@
           />
         </div>
         <p>{{ post.extract }}</p>
-        <!-- <a href="#" class="card-link">Leggi</a> -->
         <div v-show="post.category_id">
           <span class="font-weight-bold">Category: </span>
           <span
@@ -22,6 +21,7 @@
             >{{ post.category_id == category.id ? category.name : "" }}</span
           >
         </div>
+        <router-link class="mt-3" :to="{ name: 'post', params: { slug: post.slug }}">Leggi</router-link>
       </div>
     </div>
   </div>
@@ -33,7 +33,6 @@ export default {
   props: {
     post: Object,
     categories: Array,
-    // tags: Array
   },
 };
 </script>

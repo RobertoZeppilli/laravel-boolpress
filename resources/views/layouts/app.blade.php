@@ -53,7 +53,7 @@
                                             Posts
                                         </a>
                                         <a class="dropdown-item" href="{{ route('home') }}" target="_blank">
-                                            Guests
+                                            MyBlog
                                         </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();

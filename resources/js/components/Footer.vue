@@ -1,7 +1,7 @@
 <template>
-  <footer class="bg-dark text-light py-3">
+  <footer class="bg-dark text-light d-flex align-items-center">
     <div class="container text-center">
-      <h2>&copy; Laravel and Vue.JS</h2>
+      <h6 class="my-0">&copy; Laravel and Vue.JS</h6>
     </div>
   </footer>
 </template>
@@ -12,5 +12,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+  footer {
+    height: 50px;
+  }
 </style>
