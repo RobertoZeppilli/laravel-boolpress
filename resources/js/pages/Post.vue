@@ -26,7 +26,7 @@
       </router-link>
     </div>
   </section>
-  <NotFound v-else-if="!post && loading" />
+  <NotFound v-else-if="!post" />
   <Loader v-else />
 </template>
 

@@ -4907,7 +4907,7 @@ var render = function() {
           1
         )
       ])
-    : !_vm.post && _vm.loading
+    : !_vm.post
     ? _c("NotFound")
     : _c("Loader")
 }
