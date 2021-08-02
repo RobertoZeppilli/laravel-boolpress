@@ -2509,6 +2509,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'NotFound'
 });
@@ -2718,7 +2721,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".not-found[data-v-a26bf910] {\n  height: calc(100vh - 100px);\n}", ""]);
+exports.push([module.i, ".not-found[data-v-a26bf910] {\n  height: calc(100vh - 100px);\n}\n.not-found p[data-v-a26bf910] {\n  font-size: 18px;\n}", ""]);
 
 // exports
 
@@ -4797,36 +4800,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass:
+        "not-found d-flex flex-column align-items-center justify-content-center"
+    },
+    [
+      _c("h3", { staticClass: "font-weight-bold" }, [_vm._v("Error 404")]),
+      _vm._v(" "),
+      _c("img", {
+        staticClass: "my-5",
+        attrs: {
+          src:
+            "https://img-premium.flaticon.com/png/128/4196/premium/4196404.png?token=exp=1627915964~hmac=b9be935f09bff734370b37119a85e8b9",
+          alt: ""
+        }
+      }),
+      _vm._v(" "),
+      _c("p", [_vm._v("Page not found.")]),
+      _vm._v(" "),
+      _c(
+        "router-link",
+        { staticClass: "btn btn-secondary", attrs: { to: { name: "blog" } } },
+        [_c("i", { staticClass: "fas fa-arrow-left" })]
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "not-found d-flex flex-column align-items-center justify-content-center"
-      },
-      [
-        _c("h3", { staticClass: "font-weight-bold" }, [_vm._v("404")]),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "my-5",
-          attrs: {
-            src:
-              "https://img-premium.flaticon.com/png/128/4196/premium/4196404.png?token=exp=1627915964~hmac=b9be935f09bff734370b37119a85e8b9",
-            alt: ""
-          }
-        }),
-        _vm._v(" "),
-        _c("p", [_vm._v("Page not found.")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
