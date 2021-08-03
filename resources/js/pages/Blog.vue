@@ -88,7 +88,6 @@ export default {
   created() {
     this.getPosts();
     this.getCategories();
-    // this.getTags()
   },
 };
 </script>

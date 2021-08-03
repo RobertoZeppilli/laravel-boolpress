@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('Api')->group(function () {
 
     Route::get('posts', 'PostController@index');
-    Route::get('categories', 'CategoryController@index' );
     Route::get('posts/{slug}', 'PostController@show');
+    Route::get('categories', 'CategoryController@index' );
+    Route::get('categories/{slug}', 'CategoryController@show');
+    Route::get('tags/{slug}', 'TagController@show');
     
 });

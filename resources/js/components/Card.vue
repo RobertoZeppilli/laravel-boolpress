@@ -12,16 +12,44 @@
           />
         </div>
         <p>{{ post.extract }}</p>
-        <div v-show="post.category_id">
+        <div v-if="post.category_id">
           <span class="font-weight-bold">Category: </span>
-          <span
+          <router-link
+            :to="{ name: 'category', params: { slug: category.slug } }"
             class="badge badge-info text-light"
             v-for="(category, index) in categories"
             :key="index"
-            >{{ post.category_id == category.id ? category.name : "" }}</span
+            >{{
+              post.category_id == category.id ? category.name : ""
+            }}</router-link
           >
         </div>
-        <router-link class="mt-3" :to="{ name: 'post', params: { slug: post.slug }}">Leggi</router-link>
+        <div v-else>
+          <span class="font-weight-bold"
+            >Category: <strong class="no text-danger">none</strong></span
+          >
+        </div>
+        <div v-if="post.tags.length > 0">
+          <span class="font-weight-bold">Tags: </span>
+          <router-link
+            :to="{ name: 'tag', params: { slug: tag.slug } }"
+            class="badge badge-warning mr-2"
+            v-for="tag in post.tags"
+            :key="`tag-${tag.id}`"
+            >{{ tag.name }}</router-link
+          >
+        </div>
+        <div v-else>
+          <span class="font-weight-bold"
+            >Tags: <strong class="no text-danger">none</strong></span
+          >
+        </div>
+        <router-link
+          class="view mt-3"
+          :to="{ name: 'post', params: { slug: post.slug } }"
+        >
+          <i class="fas fa-book-open"></i>
+        </router-link>
       </div>
     </div>
   </div>
@@ -38,11 +66,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .post-img {
   transition: transform 0.5s ease-in-out;
   &:hover {
     transform: scale(1.2);
   }
+}
+
+.view {
+  transition: all .5s ease-in-out;
+}
+
+.no {
+  cursor: not-allowed;
 }
 </style>
