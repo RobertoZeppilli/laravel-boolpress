@@ -5,12 +5,11 @@
         <h3 class="card-title">{{ post.title }}</h3>
 
         <div class="overflow-hidden">
-          <img
-            class="post-img w-100 mb-2"
-            :src="post.cover"
-            :alt="post.title"
-            :title="post.title"
-          />
+          <vue-load-image>
+            <img class="post-img w-100 mb-2" slot="image" :src="post.cover" />
+            <img class="w-100" slot="preloader" src="https://i.stack.imgur.com/ndqUb.gif" />
+            <div class="text-danger" slot="error">No cover found.</div>
+          </vue-load-image>
         </div>
         <p>{{ post.extract }}</p>
         <div v-if="post.category_id">
@@ -57,16 +56,18 @@
 </template>
 
 <script>
+import VueLoadImage from 'vue-load-image';
 
 export default {
   name: "Card",
+  components: {
+    VueLoadImage
+  },
   props: {
     post: Object,
-    categories: Array
+    categories: Array,
   },
-  methods: {
-
-  }
+  methods: {},
 };
 </script>
 
@@ -81,7 +82,7 @@ export default {
 }
 
 .view {
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .no {

@@ -2040,6 +2040,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_load_image__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-load-image */ "./node_modules/vue-load-image/dist/vue-load-image.js");
+/* harmony import */ var vue_load_image__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_load_image__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2097,9 +2099,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
+  components: {
+    VueLoadImage: vue_load_image__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   props: {
     post: Object,
     categories: Array
@@ -2632,6 +2637,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Loader */ "./resources/js/components/Loader.vue");
 /* harmony import */ var _pages_NotFound__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/NotFound */ "./resources/js/pages/NotFound.vue");
+/* harmony import */ var vue_load_image__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-load-image */ "./node_modules/vue-load-image/dist/vue-load-image.js");
+/* harmony import */ var vue_load_image__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_load_image__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2670,6 +2677,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2682,7 +2705,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     Loader: _components_Loader__WEBPACK_IMPORTED_MODULE_0__["default"],
-    NotFound: _pages_NotFound__WEBPACK_IMPORTED_MODULE_1__["default"]
+    NotFound: _pages_NotFound__WEBPACK_IMPORTED_MODULE_1__["default"],
+    VueLoadImage: vue_load_image__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   methods: {
     getPost: function getPost(slug) {
@@ -2982,7 +3006,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nh6 {\r\n  cursor: not-allowed;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\nh6 {\r\n  cursor: not-allowed;\n}\r\n", ""]);
 
 // exports
 
@@ -4383,6 +4407,22 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-load-image/dist/vue-load-image.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vue-load-image/dist/vue-load-image.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * vue-load-image v0.2.0
+ * (c) 2021 Sangwon Lee <lsw0150305@gmail.com>
+ * Released under the MIT License.
+ */
+!function(t,e){if(true)module.exports=e();else { var i, r; }}(window,function(){return function(t){var e={};function r(i){if(e[i])return e[i].exports;var n=e[i]={i,l:!1,exports:{}};return t[i].call(n.exports,n,n.exports,r),n.l=!0,n.exports}return r.m=t,r.c=e,r.d=function(t,e,i){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:i})},r.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},r.t=function(t,e){if(1&e&&(t=r(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var i=Object.create(null);if(r.r(i),Object.defineProperty(i,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var n in t)r.d(i,n,function(e){return t[e]}.bind(null,n));return i},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s=0)}([function(t,e,r){"use strict";r.r(e);var i="pending",n="loading",s="loaded",o="failed";var a=function(t,e,r,i,n,s,o,a){var u,d="function"==typeof t?t.options:t;if(e&&(d.render=e,d.staticRenderFns=r,d._compiled=!0),i&&(d.functional=!0),s&&(d._scopeId="data-v-"+s),o?(u=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),n&&n.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(o)},d._ssrRegister=u):n&&(u=a?function(){n.call(this,this.$root.$options.shadowRoot)}:n),u)if(d.functional){d._injectStyles=u;var c=d.render;d.render=function(t,e){return u.call(e),c(t,e)}}else{var l=d.beforeCreate;d.beforeCreate=l?[].concat(l,u):[u]}return{exports:t,options:d}}({data:function(){return{status:null,img:null,src:null}},created:function(){var t=this.$slots.image[0].data.attrs;if(this.src=t.src||t["data-src"],this.src)return this.status=n,this.crossOrigin=t.crossorigin,void this.createLoader();this.status=i},updated:function(){var t=this.$slots.image[0].data.attrs,e=t.src||t["data-src"];this.status!==n||this.img?this.src!==e&&(this.src=e,this.crossOrigin=t.crossorigin,this.createLoader()):this.createLoader()},watch:{src:function(t){this.status=t?n:i}},methods:{createLoader:function(){this.destroyLoader(),this.img=new Image,this.img.onload=this.handleLoad,this.img.onerror=this.handleError,this.img.crossOrigin=this.crossOrigin,this.img.src=this.src},destroyLoader:function(){this.img&&(this.img.onload=null,this.img.onerror=null,this.img=null)},handleLoad:function(){this.destroyLoader(),this.status=s,this.$emit("onLoad")},handleError:function(t){this.destroyLoader(),this.status=o,this.$emit("onError",t)}}},function(){var t=this.$createElement;return(this._self._c||t)("div",{staticClass:"vue-load-image"},["loaded"===this.status?this._t("image"):"failed"===this.status?this._t("error"):"loading"===this.status?this._t("preloader"):this._e()],2)},[],!1,null,null,null);a.options.__file="VueLoadImage.vue";var u=a.exports;e.default=u}])});
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App.vue?vue&type=template&id=f348271a&":
 /*!*******************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/App.vue?vue&type=template&id=f348271a& ***!
@@ -4442,16 +4482,39 @@ var render = function() {
             _vm._v(_vm._s(_vm.post.title))
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "overflow-hidden" }, [
-            _c("img", {
-              staticClass: "post-img w-100 mb-2",
-              attrs: {
-                src: _vm.post.cover,
-                alt: _vm.post.title,
-                title: _vm.post.title
-              }
-            })
-          ]),
+          _c(
+            "div",
+            { staticClass: "overflow-hidden" },
+            [
+              _c("vue-load-image", [
+                _c("img", {
+                  staticClass: "post-img w-100 mb-2",
+                  attrs: { slot: "image", src: _vm.post.cover },
+                  slot: "image"
+                }),
+                _vm._v(" "),
+                _c("img", {
+                  staticClass: "w-100",
+                  attrs: {
+                    slot: "preloader",
+                    src: "https://i.stack.imgur.com/ndqUb.gif"
+                  },
+                  slot: "preloader"
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "text-danger",
+                    attrs: { slot: "error" },
+                    slot: "error"
+                  },
+                  [_vm._v("No cover found.")]
+                )
+              ])
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(_vm.post.extract))]),
           _vm._v(" "),
@@ -5302,88 +5365,117 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return !_vm.loading
-    ? _c("section", { staticClass: "post py-3" }, [
-        _c("div", [
-          _c("h2", [_vm._v(_vm._s(_vm.post.title))]),
-          _vm._v(" "),
-          _c("div", { staticClass: "info" }, [
-            _vm.post.category
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "mb-2",
-                    class: _vm.post.tags.length > 0 ? "mr-5" : ""
-                  },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "badge badge-info text-light",
-                        attrs: {
-                          to: {
-                            name: "category",
-                            params: { slug: _vm.post.category.slug }
-                          }
-                        }
-                      },
-                      [_vm._v(_vm._s(_vm.post.category.name))]
-                    )
-                  ],
-                  1
-                )
-              : _c("div", { staticClass: "mb-2" }, [
-                  _c("h6", { staticClass: "text-danger" }, [
-                    _vm._v("No Category")
-                  ])
-                ]),
+    ? _c(
+        "section",
+        { staticClass: "post py-3" },
+        [
+          _c("div", [
+            _c("h2", [_vm._v(_vm._s(_vm.post.title))]),
             _vm._v(" "),
-            _vm.post.tags.length > 0
-              ? _c(
-                  "div",
-                  { staticClass: "h6" },
-                  _vm._l(_vm.post.tags, function(tag) {
-                    return _c(
-                      "router-link",
-                      {
-                        key: tag.id,
-                        staticClass: "badge badge-pill badge-warning mr-2",
-                        attrs: {
-                          to: { name: "tag", params: { slug: tag.slug } }
-                        }
-                      },
-                      [_vm._v(_vm._s(tag.name))]
-                    )
-                  }),
-                  1
-                )
-              : _c("div", [
-                  _c("h6", { staticClass: "text-danger" }, [_vm._v("No Tags")])
-                ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "w-100 my-3",
-          attrs: { src: _vm.post.cover, alt: _vm.post.title }
-        }),
-        _vm._v(" "),
-        _c("p", [_vm._v(_vm._s(_vm.post.body))]),
-        _vm._v(" "),
-        _c(
-          "div",
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "btn btn-secondary",
-                attrs: { to: { name: "blog" } }
+            _c("div", { staticClass: "info" }, [
+              _vm.post.category
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "mb-2",
+                      class: _vm.post.tags.length > 0 ? "mr-5" : ""
+                    },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "badge badge-info text-light",
+                          attrs: {
+                            to: {
+                              name: "category",
+                              params: { slug: _vm.post.category.slug }
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(_vm.post.category.name))]
+                      )
+                    ],
+                    1
+                  )
+                : _c("div", { staticClass: "mb-2" }, [
+                    _c("h6", { staticClass: "text-danger" }, [
+                      _vm._v("No Category")
+                    ])
+                  ]),
+              _vm._v(" "),
+              _vm.post.tags.length > 0
+                ? _c(
+                    "div",
+                    { staticClass: "h6" },
+                    _vm._l(_vm.post.tags, function(tag) {
+                      return _c(
+                        "router-link",
+                        {
+                          key: tag.id,
+                          staticClass: "badge badge-pill badge-warning mr-2",
+                          attrs: {
+                            to: { name: "tag", params: { slug: tag.slug } }
+                          }
+                        },
+                        [_vm._v(_vm._s(tag.name))]
+                      )
+                    }),
+                    1
+                  )
+                : _c("div", [
+                    _c("h6", { staticClass: "text-danger" }, [
+                      _vm._v("No Tags")
+                    ])
+                  ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("vue-load-image", [
+            _c("img", {
+              staticClass: "w-100 my-3",
+              attrs: { slot: "image", src: _vm.post.cover },
+              slot: "image"
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "w-100",
+              attrs: {
+                slot: "preloader",
+                src: "https://i.stack.imgur.com/ndqUb.gif"
               },
-              [_c("i", { staticClass: "fas fa-arrow-left" })]
+              slot: "preloader"
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "text-danger",
+                attrs: { slot: "error" },
+                slot: "error"
+              },
+              [_vm._v("No cover found.")]
             )
-          ],
-          1
-        )
-      ])
+          ]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.post.body))]),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { to: { name: "blog" } }
+                },
+                [_c("i", { staticClass: "fas fa-arrow-left" })]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     : _c("Loader")
 }
 var staticRenderFns = []

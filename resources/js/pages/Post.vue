@@ -3,10 +3,16 @@
     <div>
       <h2>{{ post.title }}</h2>
       <div class="info">
-        <div v-if="post.category" class="mb-2" :class="post.tags.length > 0 ? 'mr-5' : ''">
-          <router-link :to="{ name: 'category', params: { slug: post.category.slug } }" class="badge badge-info text-light">{{
-            post.category.name
-          }}</router-link>
+        <div
+          v-if="post.category"
+          class="mb-2"
+          :class="post.tags.length > 0 ? 'mr-5' : ''"
+        >
+          <router-link
+            :to="{ name: 'category', params: { slug: post.category.slug } }"
+            class="badge badge-info text-light"
+            >{{ post.category.name }}</router-link
+          >
         </div>
         <div class="mb-2" v-else>
           <h6 class="text-danger">No Category</h6>
@@ -25,7 +31,16 @@
         </div>
       </div>
     </div>
-    <img class="w-100 my-3" :src="post.cover" :alt="post.title" />
+    <!-- <img class="w-100 my-3" :src="post.cover" :alt="post.title" /> -->
+    <vue-load-image>
+      <img class="w-100 my-3" slot="image" :src="post.cover" />
+      <img
+        class="w-100"
+        slot="preloader"
+        src="https://i.stack.imgur.com/ndqUb.gif"
+      />
+      <div class="text-danger" slot="error">No cover found.</div>
+    </vue-load-image>
     <p>{{ post.body }}</p>
     <div>
       <router-link class="btn btn-secondary" :to="{ name: 'blog' }">
@@ -39,6 +54,7 @@
 <script>
 import Loader from "../components/Loader";
 import NotFound from "../pages/NotFound";
+import VueLoadImage from 'vue-load-image';
 
 export default {
   name: "Post",
@@ -51,6 +67,7 @@ export default {
   components: {
     Loader,
     NotFound,
+    VueLoadImage
   },
   methods: {
     getPost(slug) {
@@ -79,5 +96,4 @@ export default {
 h6 {
   cursor: not-allowed;
 }
-
 </style>
