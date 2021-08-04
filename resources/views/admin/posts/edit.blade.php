@@ -75,11 +75,14 @@
             <label for="cover">Cover</label>
             @if ($post->cover)
                 <div class="mb-3">
-                    <small class="d-block">Cover Preview</small>
+                    <small class="d-block">Actual Cover</small>
                     <img style="width:100px;" src="{{ asset('storage/'.$post->cover) }}" alt="{{ $post->title }}">
                 </div>
             @endif
-            <input type="file" name="cover" class="form-control-file" id="cover">
+            {{-- preview of the cover before creating  --}}
+            <input name="cover" type="file" id="cover" class="form-control-file mb-2" accept="image/*" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])">
+            <img id="preview" style="object-fit: cover;" src="" width="300">
+            {{-- /preview of the cover before creating  --}}
             @error('cover')
                 <small class="text-danger d-block">
                     {{ $message }}

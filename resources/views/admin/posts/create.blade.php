@@ -64,7 +64,10 @@
             {{-- upload covers --}}
             <div class="form-group">
                 <label for="cover">Cover</label>
-                <input type="file" name="cover" class="form-control-file" id="cover">
+                {{-- preview of the cover before creating  --}}
+                <input name="cover" type="file" id="cover" class="form-control-file mb-2" accept="image/*" onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])"> 
+                <img id="preview" style="object-fit: cover;" src="" width="300">
+                {{-- /preview of the cover before creating  --}}
                 @error('cover')
                     <small class="text-danger d-block">
                         {{ $message }}
@@ -85,3 +88,5 @@
         </form>
     </div>
 @endsection
+
+
