@@ -65,7 +65,7 @@ export default {
   .blob {
     width: max-content;
     padding: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border-radius: 40px 53% 57% 50px;
     font-weight: bold;
     color: #343a40;

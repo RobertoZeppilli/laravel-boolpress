@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h2 class="my-3">Edit your post!</h2>
-    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST" class="mt-3">
+    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST" class="mt-3" enctype="multipart/form-data">
 
         @csrf
         @method('PATCH')
@@ -69,6 +69,25 @@
                 </small>
             @enderror
         </div>
+
+         {{-- upload covers --}}
+         <div class="form-group">
+            <label for="cover">Cover</label>
+            @if ($post->cover)
+                <div class="mb-3">
+                    <small class="d-block">Cover Preview</small>
+                    <img style="width:100px;" src="{{ asset('storage/'.$post->cover) }}" alt="{{ $post->title }}">
+                </div>
+            @endif
+            <input type="file" name="cover" class="form-control-file" id="cover">
+            @error('cover')
+                <small class="text-danger d-block">
+                    {{ $message }}
+                </small>
+            @enderror
+        </div>
+        {{-- /upload covers --}}
+        
 
         <div class="d-flex justify-content-between align-items-center">
             <a class="btn btn-secondary text-light" href="{{ route('admin.posts.index', $post->id) }}">

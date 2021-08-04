@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\Tag;
+
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -17,11 +19,11 @@ class PostController extends Controller
         "title" => "required|max:255",
         "body" => "required|max:65535",
         "category_id" => "nullable|exists:categories,id",
-        "tags" => "exists:tags,id"
+        "tags" => "exists:tags,id",
+        "cover" => "nullable|mimes:jpeg,jpg,png,svg|max:2048"
     ];
     private $validationMsg = [
-        "required" => ":attribute is required!",
-        "max" => ":attribute cannot be much longer!"
+        "required" => ":attribute is required!"
     ];
 
     private function createSlug($data)
@@ -85,11 +87,15 @@ class PostController extends Controller
         $slug = $this->createSlug($data);
         $data['slug'] = $slug;
 
+        if (array_key_exists('cover', $data)) {
+            $data['cover'] = Storage::put('covers', $data['cover']);
+        }
+
         $post->fill($data);
 
         $post->save();
 
-        if(array_key_exists('tags', $data)) {
+        if (array_key_exists('tags', $data)) {
             $post->tags()->attach($data['tags']);
         }
 
@@ -143,9 +149,17 @@ class PostController extends Controller
             $data['slug'] = $slug;
         }
 
+        if (array_key_exists('cover', $data)) {
+            if ($post->cover) {
+                Storage::delete($post->cover);
+            }
+
+            $data['cover'] = Storage::put('covers', $data['cover']);
+        }
+
         $post->update($data);
 
-        if(array_key_exists('tags', $data)) {
+        if (array_key_exists('tags', $data)) {
             $post->tags()->sync($data['tags']);
         } else {
             $post->tags()->detach();
@@ -163,7 +177,11 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
-    {
+    {   
+        if($post->cover) {
+            Storage::delete($post->cover);
+        }
+        
         $post->delete();
 
         return redirect()

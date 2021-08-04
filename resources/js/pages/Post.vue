@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <img class="w-100 my-3" :src="post.img" :alt="post.title" />
+    <!-- <img class="w-100 my-3" :src="post.img" :alt="post.title" /> -->
     <p>{{ post.body }}</p>
     <div>
       <router-link class="btn btn-secondary" :to="{ name: 'blog' }">
@@ -61,9 +61,6 @@ export default {
             this.$router.push({ name: "not-found" });
           } else {
             this.post = res.data;
-            this.post.img =
-              "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80";
-
             this.loading = false;
           }
         })

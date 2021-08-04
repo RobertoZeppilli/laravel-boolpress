@@ -10,7 +10,8 @@ class Post extends Model
         'title',
         'slug',
         'body',
-        'category_id'
+        'category_id',
+        'cover'
     ];
 
     protected $with = [
