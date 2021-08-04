@@ -2097,12 +2097,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
   props: {
     post: Object,
     categories: Array
-  }
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -2139,6 +2141,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -2408,6 +2413,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Card */ "./resources/js/components/Card.vue");
 /* harmony import */ var _components_Paginate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Paginate */ "./resources/js/components/Paginate.vue");
 /* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Loader */ "./resources/js/components/Loader.vue");
+//
+//
 //
 //
 //
@@ -2787,7 +2794,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".post-img[data-v-b9bc2c0a] {\n  transition: transform 0.5s ease-in-out;\n}\n.post-img[data-v-b9bc2c0a]:hover {\n  transform: scale(1.2);\n}\n.view[data-v-b9bc2c0a] {\n  transition: all 0.5s ease-in-out;\n}\n.no[data-v-b9bc2c0a] {\n  cursor: not-allowed;\n}", ""]);
+exports.push([module.i, ".post-img[data-v-b9bc2c0a] {\n  height: 200px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  transition: transform 0.5s ease-in-out;\n}\n.post-img[data-v-b9bc2c0a]:hover {\n  transform: scale(1.2);\n}\n.view[data-v-b9bc2c0a] {\n  transition: all 0.5s ease-in-out;\n}\n.no[data-v-b9bc2c0a] {\n  cursor: not-allowed;\n}", ""]);
 
 // exports
 
@@ -2825,7 +2832,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "header[data-v-1f42fb90] {\n  height: 50px;\n}\nheader li a[data-v-1f42fb90] {\n  display: inline-block;\n  padding: 5px 10px;\n}\nheader li a.active[data-v-1f42fb90], header li a[data-v-1f42fb90]:hover {\n  background-color: #6cb2eb;\n}", ""]);
+exports.push([module.i, "header[data-v-1f42fb90] {\n  height: 50px;\n}\nheader .logo-link[data-v-1f42fb90]:hover {\n  text-decoration: none;\n}\nheader .logo-link .logo[data-v-1f42fb90] {\n  cursor: pointer;\n  color: #fff;\n}\nheader li a[data-v-1f42fb90] {\n  display: inline-block;\n  padding: 5px 10px;\n}\nheader li a.active[data-v-1f42fb90], header li a[data-v-1f42fb90]:hover {\n  background-color: #6cb2eb;\n}", ""]);
 
 // exports
 
@@ -2977,7 +2984,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nh6 {\r\n  cursor: not-allowed;\n}\r\n", ""]);
+exports.push([module.i, "\nh6 {\r\n  cursor: not-allowed;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -4437,6 +4444,17 @@ var render = function() {
             _vm._v(_vm._s(_vm.post.title))
           ]),
           _vm._v(" "),
+          _c("div", { staticClass: "overflow-hidden" }, [
+            _c("img", {
+              staticClass: "post-img w-100 mb-2",
+              attrs: {
+                src: _vm.post.cover,
+                alt: _vm.post.title,
+                title: _vm.post.title
+              }
+            })
+          ]),
+          _vm._v(" "),
           _c("p", [_vm._v(_vm._s(_vm.post.extract))]),
           _vm._v(" "),
           _vm.post.category_id
@@ -4602,7 +4620,18 @@ var render = function() {
         "div",
         { staticClass: "d-flex justify-content-between align-items-center" },
         [
-          _vm._m(0),
+          _c(
+            "router-link",
+            { staticClass: "logo-link", attrs: { to: { name: "home" } } },
+            [
+              _c("h1", { staticClass: "logo" }, [
+                _vm._v("My"),
+                _c("span", { staticClass: "text-info text-bold" }, [
+                  _vm._v("Blog")
+                ])
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("nav", { staticClass: "d-flex align-items-center" }, [
             _c(
@@ -4659,25 +4688,17 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm._m(0)
               ]
             )
           ])
-        ]
+        ],
+        1
       )
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h1", [
-      _vm._v("My"),
-      _c("span", { staticClass: "text-info text-bold" }, [_vm._v("Blog")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -5074,7 +5095,12 @@ var render = function() {
             _vm._l(_vm.posts, function(post) {
               return _c("Card", {
                 key: post.id,
-                attrs: { post: post, categories: _vm.categories }
+                attrs: {
+                  post: post,
+                  categories: _vm.categories,
+                  isLoaded: _vm.isLoaded,
+                  isLoading: _vm.isLoading
+                }
               })
             }),
             1
@@ -5342,6 +5368,11 @@ var render = function() {
                 ])
           ])
         ]),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "w-100 my-3",
+          attrs: { src: _vm.post.cover, alt: _vm.post.title }
+        }),
         _vm._v(" "),
         _c("p", [_vm._v(_vm._s(_vm.post.body))]),
         _vm._v(" "),

@@ -2,7 +2,10 @@
   <header class="bg-dark text-light">
     <div class="container">
       <div class="d-flex justify-content-between align-items-center">
-        <h1>My<span class="text-info text-bold">Blog</span></h1>
+        <router-link class="logo-link" :to="{ name: 'home' }">
+          <h1 class="logo">My<span class="text-info text-bold">Blog</span></h1>
+        </router-link>
+
         <nav class="d-flex align-items-center">
           <ul
             class="d-flex align-items-center text-uppercase list-unstyled m-0"
@@ -51,7 +54,15 @@ export default {
 <style lang="scss" scoped>
 header {
   height: 50px;
-
+  .logo-link {
+    &:hover {
+      text-decoration: none;
+    }
+    .logo {
+      cursor: pointer;
+      color: #fff;
+    }
+  }
   li {
     a {
       display: inline-block;

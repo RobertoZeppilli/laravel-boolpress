@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <!-- <img class="w-100 my-3" :src="post.img" :alt="post.title" /> -->
+    <img class="w-100 my-3" :src="post.cover" :alt="post.title" />
     <p>{{ post.body }}</p>
     <div>
       <router-link class="btn btn-secondary" :to="{ name: 'blog' }">
@@ -79,4 +79,5 @@ export default {
 h6 {
   cursor: not-allowed;
 }
+
 </style>

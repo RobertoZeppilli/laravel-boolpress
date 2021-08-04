@@ -7,32 +7,34 @@
         :key="post.id"
         :post="post"
         :categories="categories"
+        :isLoaded="isLoaded"
+        :isLoading="isLoading"
       />
     </div>
     <Paginate
-        :current="current_page"
-        :last="last_page"
-        @active="activePosts"
-        @prev="getPosts(current_page - 1)"
-        @next="getPosts(current_page + 1)"
-        @firstPage="getPosts(1)"
-        @lastPage="getPosts(last_page)"
+      :current="current_page"
+      :last="last_page"
+      @active="activePosts"
+      @prev="getPosts(current_page - 1)"
+      @next="getPosts(current_page + 1)"
+      @firstPage="getPosts(1)"
+      @lastPage="getPosts(last_page)"
     />
   </section>
   <Loader v-else />
 </template>
 
 <script>
-import Card from '../components/Card';
-import Paginate from '../components/Paginate';
-import Loader from '../components/Loader';
+import Card from "../components/Card";
+import Paginate from "../components/Paginate";
+import Loader from "../components/Loader";
 
 export default {
   name: "Blog",
   components: {
-      Paginate,
-      Card,
-      Loader
+    Paginate,
+    Card,
+    Loader,
   },
   data() {
     return {
@@ -40,7 +42,7 @@ export default {
       categories: [],
       current_page: 1,
       last_page: 1,
-      num: 0,
+      num: 0
     };
   },
   methods: {
@@ -62,6 +64,7 @@ export default {
 
           this.posts.forEach((post) => {
             post.extract = this.truncateText(post.body, 150);
+
           });
         })
         .catch((err) => {
