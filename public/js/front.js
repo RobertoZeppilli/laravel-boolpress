@@ -2099,6 +2099,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
@@ -4474,124 +4480,116 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-4 my-3 d-flex" }, [
     _c("div", { staticClass: "card w-100 rounded" }, [
-      _c(
-        "div",
-        { staticClass: "card-body" },
-        [
-          _c("h3", { staticClass: "card-title" }, [
-            _vm._v(_vm._s(_vm.post.title))
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "overflow-hidden" },
-            [
-              _c("vue-load-image", [
-                _c("img", {
-                  staticClass: "post-img w-100 mb-2",
-                  attrs: { slot: "image", src: _vm.post.cover },
-                  slot: "image"
-                }),
-                _vm._v(" "),
-                _c("img", {
-                  staticClass: "w-100",
-                  attrs: {
-                    slot: "preloader",
-                    src: "https://i.stack.imgur.com/ndqUb.gif"
-                  },
-                  slot: "preloader"
-                }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "text-danger",
-                    attrs: { slot: "error" },
-                    slot: "error"
-                  },
-                  [_vm._v("No cover found.")]
-                )
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm.post.extract))]),
-          _vm._v(" "),
-          _vm.post.category_id
-            ? _c(
+      _c("div", { staticClass: "card-body" }, [
+        _c("h3", { staticClass: "card-title" }, [
+          _vm._v(_vm._s(_vm.post.title))
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "overflow-hidden" },
+          [
+            _c("vue-load-image", [
+              _c("img", {
+                staticClass: "post-img w-100 mb-2",
+                attrs: { slot: "image", src: _vm.post.cover },
+                slot: "image"
+              }),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "w-100",
+                attrs: {
+                  slot: "preloader",
+                  src: "https://i.stack.imgur.com/ndqUb.gif"
+                },
+                slot: "preloader"
+              }),
+              _vm._v(" "),
+              _c(
                 "div",
-                [
-                  _c("span", { staticClass: "font-weight-bold" }, [
-                    _vm._v("Category: ")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.categories, function(category, index) {
-                    return _c(
-                      "router-link",
-                      {
-                        key: index,
-                        staticClass: "badge badge-info text-light",
-                        attrs: {
-                          to: {
-                            name: "category",
-                            params: { slug: category.slug }
+                {
+                  staticClass: "text-danger",
+                  attrs: { slot: "error" },
+                  slot: "error"
+                },
+                [_vm._v("No cover found.")]
+              )
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.post.extract))]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "d-flex justify-content-between align-items-center" },
+          [
+            _c("div", { staticClass: "d-flex flex-column" }, [
+              _vm.post.category_id
+                ? _c(
+                    "div",
+                    _vm._l(_vm.categories, function(category, index) {
+                      return _c(
+                        "router-link",
+                        {
+                          key: index,
+                          staticClass: "badge badge-info text-light",
+                          attrs: {
+                            to: {
+                              name: "category",
+                              params: { slug: category.slug }
+                            }
                           }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(
-                            _vm.post.category_id == category.id
-                              ? category.name
-                              : ""
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.post.category_id == category.id
+                                ? category.name
+                                : ""
+                            )
                           )
-                        )
-                      ]
-                    )
-                  })
-                ],
-                2
-              )
-            : _c("div", [_vm._m(0)]),
-          _vm._v(" "),
-          _vm.post.tags.length > 0
-            ? _c(
-                "div",
-                [
-                  _c("span", { staticClass: "font-weight-bold" }, [
-                    _vm._v("Tags: ")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.post.tags, function(tag) {
-                    return _c(
-                      "router-link",
-                      {
-                        key: "tag-" + tag.id,
-                        staticClass: "badge badge-warning mr-2",
-                        attrs: {
-                          to: { name: "tag", params: { slug: tag.slug } }
-                        }
-                      },
-                      [_vm._v(_vm._s(tag.name))]
-                    )
-                  })
-                ],
-                2
-              )
-            : _c("div", [_vm._m(1)]),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              staticClass: "view mt-3",
-              attrs: { to: { name: "post", params: { slug: _vm.post.slug } } }
-            },
-            [_c("i", { staticClass: "fas fa-book-open" })]
-          )
-        ],
-        1
-      )
+                        ]
+                      )
+                    }),
+                    1
+                  )
+                : _c("div", [_vm._m(0)]),
+              _vm._v(" "),
+              _vm.post.tags.length > 0
+                ? _c(
+                    "div",
+                    _vm._l(_vm.post.tags, function(tag) {
+                      return _c(
+                        "router-link",
+                        {
+                          key: "tag-" + tag.id,
+                          staticClass: "badge badge-warning mr-2",
+                          attrs: {
+                            to: { name: "tag", params: { slug: tag.slug } }
+                          }
+                        },
+                        [_vm._v(_vm._s(tag.name))]
+                      )
+                    }),
+                    1
+                  )
+                : _c("div", [_vm._m(1)])
+            ]),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "view",
+                attrs: { to: { name: "post", params: { slug: _vm.post.slug } } }
+              },
+              [_c("i", { staticClass: "fas fa-book-open" })]
+            )
+          ],
+          1
+        )
+      ])
     ])
   ])
 }
