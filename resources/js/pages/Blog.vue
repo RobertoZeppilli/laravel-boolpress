@@ -7,8 +7,6 @@
         :key="post.id"
         :post="post"
         :categories="categories"
-        :isLoaded="isLoaded"
-        :isLoading="isLoading"
       />
     </div>
     <Paginate

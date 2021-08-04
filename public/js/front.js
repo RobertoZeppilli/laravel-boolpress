@@ -2437,8 +2437,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -5095,12 +5093,7 @@ var render = function() {
             _vm._l(_vm.posts, function(post) {
               return _c("Card", {
                 key: post.id,
-                attrs: {
-                  post: post,
-                  categories: _vm.categories,
-                  isLoaded: _vm.isLoaded,
-                  isLoading: _vm.isLoading
-                }
+                attrs: { post: post, categories: _vm.categories }
               })
             }),
             1
