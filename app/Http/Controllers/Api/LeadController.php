@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 use App\Lead;
+use App\Mail\ContactMessage;
 
 class LeadController extends Controller
 {
@@ -35,6 +37,8 @@ class LeadController extends Controller
         $lead->fill($data);
 
         $lead->save();
+
+        Mail::to('admin@sito.it')->send(new ContactMessage($lead));
 
         return response()->json([
             'success' => true
