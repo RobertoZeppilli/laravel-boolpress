@@ -1,6 +1,6 @@
 <template>
   <section class="about py-3">
-    <h2>About Page</h2>
+    <h1>About Page</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum sint
       placeat ipsam repellendus laboriosam sed beatae, id amet at esse nisi unde

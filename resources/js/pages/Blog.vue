@@ -1,6 +1,6 @@
 <template>
   <section v-if="posts.length > 0" class="blog pt-3">
-    <h2>Blog</h2>
+    <h1>Blog</h1>
     <div class="row">
       <Card
         v-for="post in posts"

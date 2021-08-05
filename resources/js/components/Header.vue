@@ -32,6 +32,13 @@
               >
             </li>
             <li class="ml-5">
+              <router-link
+                class="text-decoration-none text-light"
+                :to="{ name: 'contacts' }"
+                >Contacts</router-link
+              >
+            </li>
+            <li class="ml-5">
               <a
                 class="text-decoration-none text-light btn btn-info"
                 href="http://127.0.0.1:8000/admin"

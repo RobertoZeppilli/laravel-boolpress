@@ -9,6 +9,7 @@ import Post from './pages/Post';
 import NotFound from './pages/NotFound';
 import Category from './pages/Category';
 import Tag from './pages/Tag';
+import Contact from './pages/Contact';
 
 const router = new VueRouter(
     {
@@ -24,6 +25,11 @@ const router = new VueRouter(
                 path: '/about',
                 name: 'about',
                 component: About
+            },
+            {
+                path: '/contacts',
+                name: 'contacts',
+                component: Contact
             },
             {
                 path: '/blog',

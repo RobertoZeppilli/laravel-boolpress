@@ -24,5 +24,7 @@ Route::namespace('Api')->group(function () {
     Route::get('categories', 'CategoryController@index' );
     Route::get('categories/{slug}', 'CategoryController@show');
     Route::get('tags/{slug}', 'TagController@show');
+
+    Route::post('leads', 'LeadController@store');
     
 });
